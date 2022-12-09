@@ -7,7 +7,9 @@ const HasElectricity = {
 const iconsMap = {
     Yes: 'favicon-green.ico',
     No: 'favicon-red.ico',
-    Maybe: 'favicon-blue.ico'
+    Maybe: 'favicon-blue.ico',
+    Success: 'favicon-green.ico',
+    Failed: 'favicon-red.ico'
 }
 
 const periodColors = {
@@ -20,6 +22,21 @@ const periodMessages = {
     Yes: 'Has Electricity',
     No: 'No Electricity',
     Maybe: 'May turn OFF'
+}
+
+const PingState = {
+    Success: 'Success',
+    Failed: 'Failed'
+};
+
+const pingStateMessages = {
+    Success: 'Has Electricity',
+    Failed: 'No Electricity',
+}
+
+const pingStateColors = {
+    Success: 'green',
+    Failed: 'red',
 }
 
 const periodsData = {

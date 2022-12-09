@@ -2,7 +2,7 @@ $(document).ready(function(){
     checkInterval();
     window.setInterval(function(){
         checkInterval();
-    }, 3000);
+    }, 5000);
 });
 
 function setIcon(name) {
@@ -21,9 +21,7 @@ function resolveCurrentPeriod() {
     const hour = today.getHours();
     const period = periodsData[dayOfWeek][hour];
     console.log('Day of week: ' + dayOfWeek + ' hour: ' + hour + ' electricity: ' + period);
-    setIcon(iconsMap[period])
-
-    setBoxData('current-period-container', 'current-period-message', 'Currently: ' + periodMessages[period], periodColors[period]);
+    setBoxData('current-period-container', 'current-period-message', 'Current Period: ' + periodMessages[period], periodColors[period]);
 }
 
 function resolveNextPeriod() {
@@ -55,12 +53,19 @@ function resolveNextPeriod() {
     setBoxData(
         'next-period-container',
         'next-period-message',
-        'Next: '+ periodMessages[nextPeriod] + ' in ' + hoursToNextPeriod + ' hour ' + minutesToNextPeriod + ' minutes',
+        'Next Period: '+ periodMessages[nextPeriod] + ' in ' + hoursToNextPeriod + ' hour ' + minutesToNextPeriod + ' minutes',
         periodColors[nextPeriod]);
 }
 
-function checkInterval() {
+async function resolvePingState() {
+    const pingResult = await ping('193.93.218.233');
+    console.log('Ping func result: ' + pingResult);
+    setIcon(iconsMap[pingResult]);
+    setBoxData('electricity-state-container', 'electricity-state-message', 'Real State: ' +  pingStateMessages[pingResult], pingStateColors[pingResult]);
+}
+async function checkInterval() {
     console.log("Checking...");
     resolveCurrentPeriod();
     resolveNextPeriod();
+    await resolvePingState();
 }
